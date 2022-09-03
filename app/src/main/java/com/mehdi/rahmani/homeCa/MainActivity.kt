@@ -12,12 +12,10 @@ import com.mehdi.rahmani.homeCa.databinding.ActivityMainBinding
 import java.util.*
 import kotlin.concurrent.schedule
 
-
+var db: DB? = null
 class MainActivity : AppCompatActivity() {
 
     lateinit var mainActivity: ActivityMainBinding
-    var db: DB? = null
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
