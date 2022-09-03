@@ -6,6 +6,6 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "Neighbour")
 data class Neighbourhood(
-    @PrimaryKey val id: Int,
-    @ColumnInfo(name = "name") val name: String
+    @PrimaryKey val id: Int?,
+    @ColumnInfo(name = "name") val name: String?
 )
