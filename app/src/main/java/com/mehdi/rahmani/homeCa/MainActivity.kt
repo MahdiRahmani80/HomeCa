@@ -3,8 +3,7 @@ package com.mehdi.rahmani.homeCa
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.room.Room
 import com.mehdi.rahmani.homeCa.Home.HomeFragment
 import com.mehdi.rahmani.homeCa.Model.DataBase.DB
@@ -14,18 +13,23 @@ import java.util.*
 import kotlin.concurrent.schedule
 
 
-lateinit var db: DB
-
 class MainActivity : AppCompatActivity() {
 
     lateinit var mainActivity: ActivityMainBinding
+    var db: DB? = null
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mainActivity = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mainActivity.root)
 
+        // set view model
+        val mainVM: MainViewModel by viewModels()
+
+
         // make DataBase Instance
-        mkDataBase(mainActivity.root.context)
+        mkDataBase(mainActivity.root.context, mainVM)
 
 
         // make splash
@@ -38,13 +42,17 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun mkDataBase(context: Context) {
+    private fun mkDataBase(context: Context, mainVM: MainViewModel) {
         if (db == null) {
             db = Room.databaseBuilder(context, DB::class.java, "app_database")
                 .allowMainThreadQueries().build()
 
-            if (db.HomeDao().getHomesSize() == 0){
-
+            // if database is empty
+            if (db!!.HomeDao().getHomesSize() == 0) {
+                //make fake data
+                mainVM.getHomeFakeData(db!!).observe(this) { data ->
+                    for (home in data) db!!.HomeDao().addHome(home)
+                }
             }
         }
     }
