@@ -11,6 +11,12 @@ interface HomeDao {
     @Query("SELECT * ,COUNT(*) FROM home")
     fun getHomesSize():Int
 
+    @Query("SELECT * FROM NeighbourInCity")
+    fun getNeighbourInCity():List<NeighbourInCity>
+
+    @Query("SELECT * FROM city")
+    fun getCity():List<City>
+
     // Inserts
     @Insert(entity= Home::class)
     fun addHome(home: Home)

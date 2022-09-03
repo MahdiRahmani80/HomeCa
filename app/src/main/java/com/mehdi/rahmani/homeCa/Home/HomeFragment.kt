@@ -5,9 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import com.google.android.material.tabs.TabLayout
-import com.mehdi.rahmani.homeCa.R
-import com.mehdi.rahmani.homeCa.databinding.ActivityMainBinding
+import com.google.android.material.tabs.TabLayoutMediator
+import com.mehdi.rahmani.homeCa.Home.ViewPager.HomeViewPagerAdapter
+import com.mehdi.rahmani.homeCa.Model.Objects.City
+import com.mehdi.rahmani.homeCa.Model.Objects.NeighbourInCity
 import com.mehdi.rahmani.homeCa.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
@@ -21,17 +25,25 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        val view = binding.root
-        return view
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // add tab
-        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("تهران"))
-        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("تبریز"))
-        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("ارومیه"))
+        // make view model
+        val vm: HomeViewModel by viewModels()
+
+        vm.getNeighbours().observe(requireActivity(), Observer<List<City>> { data ->
+            binding.pagerHome.adapter = HomeViewPagerAdapter(requireActivity(), data)
+            TabLayoutMediator(binding.tabLayout,binding.pagerHome){tab,position ->
+                tab.text = data[position].city_name
+            }.attach()
+        })
+
+
+
+
 
     }
 
