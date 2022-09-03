@@ -11,7 +11,9 @@ class HomeViewPagerAdapter(fragmentActivity: FragmentActivity,private val data: 
     override fun getItemCount(): Int = data.size
 
     override fun createFragment(position: Int): Fragment {
-        return HomeChartFragment()
+        val h = HomeChartFragment()
+        h.position =position
+        return h
     }
 
 }

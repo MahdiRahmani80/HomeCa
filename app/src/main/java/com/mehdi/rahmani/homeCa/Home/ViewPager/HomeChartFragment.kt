@@ -10,7 +10,9 @@ import com.mehdi.rahmani.homeCa.databinding.FragmentHomeChartBinding
 
 class HomeChartFragment() : Fragment() {
 
-    private var _binding:FragmentHomeChartBinding? =null
+    var position: Int? = null
+
+    private var _binding: FragmentHomeChartBinding? = null
     private val binding get() = _binding!!
 
 
