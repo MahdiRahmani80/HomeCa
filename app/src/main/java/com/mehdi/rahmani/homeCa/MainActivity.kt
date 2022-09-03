@@ -18,9 +18,9 @@ class MainActivity : AppCompatActivity() {
     lateinit var mainActivity: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
         mainActivity = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mainActivity.root)
+        super.onCreate(savedInstanceState)
 
         // set view model
         val mainVM: MainViewModel by viewModels()
@@ -30,12 +30,9 @@ class MainActivity : AppCompatActivity() {
         mkDataBase(mainActivity.root.context, mainVM)
 
 
-        // make splash
-        supportFragmentManager.beginTransaction().replace(R.id.frame, SplashFragment()).commit()
-
-        // after 3 sec go to home
-        Timer().schedule(3000) {
-            supportFragmentManager.beginTransaction().replace(R.id.frame, HomeFragment()).commit()
+        // show fragments
+        mainVM.getFragment().observe(this){
+            supportFragmentManager.beginTransaction().replace(R.id.frame, it ).commit()
         }
 
     }

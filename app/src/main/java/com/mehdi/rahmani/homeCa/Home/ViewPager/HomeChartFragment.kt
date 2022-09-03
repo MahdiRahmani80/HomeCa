@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import com.mehdi.rahmani.homeCa.databinding.FragmentHomeChartBinding
 
 
-class HomeChartFragment(private val position: Int) : Fragment() {
+class HomeChartFragment() : Fragment() {
 
     private var _binding:FragmentHomeChartBinding? =null
     private val binding get() = _binding!!
