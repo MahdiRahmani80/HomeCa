@@ -9,6 +9,8 @@ import androidx.fragment.app.viewModels
 import com.google.android.material.tabs.TabLayoutMediator
 import com.mehdi.rahmani.homeCa.home.viewPager.HomeViewPagerAdapter
 import com.mehdi.rahmani.homeCa.databinding.FragmentHomeBinding
+import com.mehdi.rahmani.homeCa.model.dataBase.HomeDao
+import org.koin.android.ext.android.inject
 
 class HomeFragment : Fragment() {
 
@@ -36,7 +38,9 @@ class HomeFragment : Fragment() {
 
 
     private fun mkViewPager(vm: HomeViewModel) {
-        vm.getCity().observe(requireActivity()) { data ->
+        val homeDao: HomeDao by inject()
+
+        vm.getCity(homeDao).observe(requireActivity()) { data ->
             if(_binding != null) {
                 binding.pagerHome.adapter = HomeViewPagerAdapter(requireActivity(), data)
                 TabLayoutMediator(binding.tabLayout, binding.pagerHome) { tab, position ->

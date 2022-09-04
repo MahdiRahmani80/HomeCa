@@ -1,13 +1,14 @@
 package com.mehdi.rahmani.homeCa.model.makeFakeData
 
 import com.mehdi.rahmani.homeCa.model.dataBase.AppDatabase
+import com.mehdi.rahmani.homeCa.model.dataBase.HomeDao
 import com.mehdi.rahmani.homeCa.model.objects.*
 import kotlin.random.Random
 
 class MakeFakeData {
 
     companion object{
-        fun mkRandomHome(dataBase: AppDatabase) {
+        fun mkRandomHome(dataBase: HomeDao) {
 
             val cityList = ArrayList<City>()
             val neighbourList = ArrayList<Neighbourhood>()
@@ -24,14 +25,14 @@ class MakeFakeData {
                 }
                 val c = City(i, city)
                 cityList.add(c)
-                dataBase.HomeDao().addCity(c)
+                dataBase.addCity(c)
             }
             // add neighbour
 
             for (i in (0..2)) {
                 val n = Neighbourhood(i, "محله $i")
                 neighbourList.add(n)
-                dataBase.HomeDao().addNeighbour(n)
+                dataBase.addNeighbour(n)
             }
 
             // add home
@@ -40,10 +41,9 @@ class MakeFakeData {
                 val doc = if (randYear % 2 == 0) true else false
                 val area = randYear * i / 1000
                 val h = Home(i, randYear, doc, area, area * i * randYear)
-                dataBase.HomeDao().addHome(h)
-                dataBase.HomeDao().addHomeInNeighbour(HomesInNeighbour(i, h, neighbourList[i % 3]))
-                dataBase.HomeDao()
-                    .addNeighbourInCity(NeighbourInCity(i, neighbourList[i % 3], cityList[i % 3]))
+                dataBase.addHome(h)
+                dataBase.addHomeInNeighbour(HomesInNeighbour(i, h, neighbourList[i % 3]))
+                dataBase.addNeighbourInCity(NeighbourInCity(i, neighbourList[i % 3], cityList[i % 3]))
             }
 
         }

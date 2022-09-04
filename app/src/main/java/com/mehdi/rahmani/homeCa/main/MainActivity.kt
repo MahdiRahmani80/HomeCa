@@ -1,14 +1,15 @@
-package com.mehdi.rahmani.homeCa
+package com.mehdi.rahmani.homeCa.main
 
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
-import androidx.room.Room
+import com.mehdi.rahmani.homeCa.R
 import com.mehdi.rahmani.homeCa.model.dataBase.AppDatabase
 import com.mehdi.rahmani.homeCa.databinding.ActivityMainBinding
+import com.mehdi.rahmani.homeCa.model.dataBase.HomeDao
+import org.koin.android.ext.android.inject
 
-var db: AppDatabase? = null
 class MainActivity : AppCompatActivity() {
 
     lateinit var mainActivity: ActivityMainBinding
@@ -27,25 +28,23 @@ class MainActivity : AppCompatActivity() {
 
 
         // show fragments
-        mainVM.getFragment().observe(this){
-            supportFragmentManager.beginTransaction().replace(R.id.frame, it ).commit()
+        mainVM.getFragment().observe(this) {
+            supportFragmentManager.beginTransaction().replace(R.id.frame, it).commit()
         }
 
     }
 
     private fun mkDataBase(context: Context, mainVM: MainViewModel) {
-        if (db == null) {
-            db = Room.databaseBuilder(context.applicationContext, AppDatabase::class.java, "app_database")
-                .allowMainThreadQueries().build()
 
-            // if database is empty
-            if (db!!.HomeDao().getHomesSize() == 0) {
-                //make fake data
-                mainVM.getHomeFakeData(db!!).observe(this) { data ->
-                    for (home in data) db!!.HomeDao().addHome(home)
-                }
+        val homeDao: HomeDao by inject()
+        // if database is empty
+        if (homeDao.getHomesSize() == 0) {
+            //make fake data
+            mainVM.getHomeFakeData(homeDao).observe(this) { data ->
+                for (home in data) homeDao.addHome(home)
             }
         }
+
     }
 
 }

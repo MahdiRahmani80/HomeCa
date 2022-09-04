@@ -1,4 +1,4 @@
-package com.mehdi.rahmani.homeCa
+package com.mehdi.rahmani.homeCa.main
 
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
@@ -6,17 +6,16 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.mehdi.rahmani.homeCa.home.HomeFragment
 import com.mehdi.rahmani.homeCa.model.dataBase.AppDatabase
+import com.mehdi.rahmani.homeCa.model.dataBase.HomeDao
 import com.mehdi.rahmani.homeCa.model.makeFakeData.MakeFakeData
 import com.mehdi.rahmani.homeCa.model.objects.*
 import com.mehdi.rahmani.homeCa.splash.SplashFragment
 import java.util.*
-import kotlin.collections.ArrayList
 import kotlin.concurrent.schedule
-import kotlin.random.Random
 
 class MainViewModel : ViewModel() {
 
-    private lateinit var dataBase: AppDatabase
+    private lateinit var dataBase: HomeDao
     private var _fr: Fragment? = null
     private val fr: MutableLiveData<Fragment> by lazy {
         MutableLiveData<Fragment>().also {
@@ -39,8 +38,8 @@ class MainViewModel : ViewModel() {
         return fr
     }
 
-    fun getHomeFakeData(db: AppDatabase): LiveData<List<Home>> {
-        dataBase = db
+    fun getHomeFakeData(homeDao: HomeDao): LiveData<List<Home>> {
+        dataBase = homeDao
         return fakeHome
     }
 

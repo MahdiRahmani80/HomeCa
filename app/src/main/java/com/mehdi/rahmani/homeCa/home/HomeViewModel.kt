@@ -3,10 +3,10 @@ package com.mehdi.rahmani.homeCa.home
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.mehdi.rahmani.homeCa.model.dataBase.HomeDao
 import com.mehdi.rahmani.homeCa.model.objects.City
-import com.mehdi.rahmani.homeCa.db
 
-class HomeViewModel() : ViewModel() {
+class HomeViewModel: ViewModel() {
 
 
     private var _city:List<City>?=null
@@ -14,11 +14,12 @@ class HomeViewModel() : ViewModel() {
         MutableLiveData<List<City>>()
     }
 
-    fun getCity(): LiveData<List<City>>  {
+    fun getCity(homeDao: HomeDao): LiveData<List<City>>  {
+
         if (_city!=null) {
             viewPagerData.postValue(_city!!)
         }else if (_city !is List<City> ){
-            _city = db!!.HomeDao().getCity()
+            _city = homeDao.getCity()
             viewPagerData.postValue(_city!!)
         }
         return viewPagerData
