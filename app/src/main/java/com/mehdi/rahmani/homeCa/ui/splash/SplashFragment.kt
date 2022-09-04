@@ -1,4 +1,4 @@
-package com.mehdi.rahmani.homeCa.splash
+package com.mehdi.rahmani.homeCa.ui.splash
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

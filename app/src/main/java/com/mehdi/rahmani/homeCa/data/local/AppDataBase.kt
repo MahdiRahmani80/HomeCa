@@ -1,8 +1,9 @@
-package com.mehdi.rahmani.homeCa.model.dataBase
+package com.mehdi.rahmani.homeCa.data
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.mehdi.rahmani.homeCa.model.objects.*
+import com.mehdi.rahmani.homeCa.data.local.HomeDao
+import com.mehdi.rahmani.homeCa.model.*
 
 
 @Database(

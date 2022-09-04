@@ -1,4 +1,4 @@
-package com.mehdi.rahmani.homeCa.home.viewPager
+package com.mehdi.rahmani.homeCa.ui.home.viewPager
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -28,6 +28,13 @@ class HomeChartFragment() : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        if(_binding!= null){
+            setChart()
+        }
+    }
+
+
+    private fun setChart() {
     }
 
     override fun onDestroyView() {

@@ -1,4 +1,4 @@
-package com.mehdi.rahmani.homeCa.model.objects
+package com.mehdi.rahmani.homeCa.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

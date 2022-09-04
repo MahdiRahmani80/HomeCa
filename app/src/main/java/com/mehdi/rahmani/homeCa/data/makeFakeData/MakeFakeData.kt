@@ -1,13 +1,13 @@
-package com.mehdi.rahmani.homeCa.model.makeFakeData
+package com.mehdi.rahmani.homeCa.data.makeFakeData
 
-import com.mehdi.rahmani.homeCa.model.dataBase.AppDatabase
-import com.mehdi.rahmani.homeCa.model.dataBase.HomeDao
-import com.mehdi.rahmani.homeCa.model.objects.*
+import com.mehdi.rahmani.homeCa.data.local.HomeDao
+import com.mehdi.rahmani.homeCa.model.*
 import kotlin.random.Random
 
 class MakeFakeData {
 
-    companion object{
+    companion object {
+
         fun mkRandomHome(dataBase: HomeDao) {
 
             val cityList = ArrayList<City>()
@@ -15,13 +15,10 @@ class MakeFakeData {
 
             //add city
             for (i in (0..2)) {
-                var city: String?
-                if (i == 0) {
-                    city = "تهران"
-                } else if (i == 1) {
-                    city = "تبریز"
-                } else {
-                    city = "ارومیه"
+                val city = when (i) {
+                    0 -> "تهران"
+                    1 -> "تبریز"
+                    else -> "ارومیه"
                 }
                 val c = City(i, city)
                 cityList.add(c)
@@ -38,12 +35,18 @@ class MakeFakeData {
             // add home
             for (i in (0..300)) {
                 val randYear = Random.nextInt(1995, 2022)
-                val doc = if (randYear % 2 == 0) true else false
+                val doc = (randYear % 2 == 0)
                 val area = randYear * i / 1000
                 val h = Home(i, randYear, doc, area, area * i * randYear)
                 dataBase.addHome(h)
                 dataBase.addHomeInNeighbour(HomesInNeighbour(i, h, neighbourList[i % 3]))
-                dataBase.addNeighbourInCity(NeighbourInCity(i, neighbourList[i % 3], cityList[i % 3]))
+                dataBase.addNeighbourInCity(
+                    NeighbourInCity(
+                        i,
+                        neighbourList[i % 3],
+                        cityList[i % 3]
+                    )
+                )
             }
 
         }

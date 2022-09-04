@@ -1,15 +1,18 @@
-package com.mehdi.rahmani.homeCa.model.dataBase
+package com.mehdi.rahmani.homeCa.data.local
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import com.mehdi.rahmani.homeCa.model.objects.*
+import com.mehdi.rahmani.homeCa.model.*
 
 @Dao
 interface HomeDao {
 
     @Query("SELECT * ,COUNT(*) FROM home")
     fun getHomesSize():Int
+
+    @Query("SELECT * FROM home")
+    fun getHomes():List<Home>
 
     @Query("SELECT * FROM NeighbourInCity")
     fun getNeighbourInCity():List<NeighbourInCity>
