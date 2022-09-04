@@ -1,9 +1,9 @@
-package com.mehdi.rahmani.homeCa.Model.DataBase
+package com.mehdi.rahmani.homeCa.model.dataBase
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import com.mehdi.rahmani.homeCa.Model.Objects.*
+import com.mehdi.rahmani.homeCa.model.objects.*
 
 @Dao
 interface HomeDao {

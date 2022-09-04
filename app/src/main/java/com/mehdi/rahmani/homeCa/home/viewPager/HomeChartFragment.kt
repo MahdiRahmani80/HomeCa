@@ -1,4 +1,4 @@
-package com.mehdi.rahmani.homeCa.Home.ViewPager
+package com.mehdi.rahmani.homeCa.home.viewPager
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

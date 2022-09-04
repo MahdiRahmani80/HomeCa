@@ -1,8 +1,7 @@
-package com.mehdi.rahmani.homeCa.Model.Objects
+package com.mehdi.rahmani.homeCa.model.objects
 
 import androidx.room.Embedded
 import androidx.room.Entity
-import androidx.room.Relation
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "HomesInNeighbour")

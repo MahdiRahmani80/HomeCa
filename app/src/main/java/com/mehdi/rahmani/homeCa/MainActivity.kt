@@ -5,14 +5,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.room.Room
-import com.mehdi.rahmani.homeCa.Home.HomeFragment
-import com.mehdi.rahmani.homeCa.Model.DataBase.DB
-import com.mehdi.rahmani.homeCa.Splash.SplashFragment
+import com.mehdi.rahmani.homeCa.model.dataBase.AppDatabase
 import com.mehdi.rahmani.homeCa.databinding.ActivityMainBinding
-import java.util.*
-import kotlin.concurrent.schedule
 
-var db: DB? = null
+var db: AppDatabase? = null
 class MainActivity : AppCompatActivity() {
 
     lateinit var mainActivity: ActivityMainBinding
@@ -39,7 +35,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun mkDataBase(context: Context, mainVM: MainViewModel) {
         if (db == null) {
-            db = Room.databaseBuilder(context, DB::class.java, "app_database")
+            db = Room.databaseBuilder(context.applicationContext, AppDatabase::class.java, "app_database")
                 .allowMainThreadQueries().build()
 
             // if database is empty

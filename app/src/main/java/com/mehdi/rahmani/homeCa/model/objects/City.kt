@@ -1,4 +1,4 @@
-package com.mehdi.rahmani.homeCa.Model.Objects
+package com.mehdi.rahmani.homeCa.model.objects
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -7,5 +7,5 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "city")
 data class City(
     @PrimaryKey val id: Int?,
-    @ColumnInfo(name="name") val city_name:String?
+    @ColumnInfo(name="city_name") val city_name:String?
     )

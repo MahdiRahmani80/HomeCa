@@ -1,6 +1,5 @@
-package com.mehdi.rahmani.homeCa.Home
+package com.mehdi.rahmani.homeCa.home
 
-import android.content.res.Configuration
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.google.android.material.tabs.TabLayoutMediator
-import com.mehdi.rahmani.homeCa.Home.ViewPager.HomeViewPagerAdapter
+import com.mehdi.rahmani.homeCa.home.viewPager.HomeViewPagerAdapter
 import com.mehdi.rahmani.homeCa.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {

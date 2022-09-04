@@ -1,14 +1,10 @@
-package com.mehdi.rahmani.homeCa.Home
+package com.mehdi.rahmani.homeCa.home
 
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.mehdi.rahmani.homeCa.Model.Objects.City
-import com.mehdi.rahmani.homeCa.Splash.SplashFragment
+import com.mehdi.rahmani.homeCa.model.objects.City
 import com.mehdi.rahmani.homeCa.db
-import java.util.*
-import kotlin.concurrent.schedule
 
 class HomeViewModel() : ViewModel() {
 

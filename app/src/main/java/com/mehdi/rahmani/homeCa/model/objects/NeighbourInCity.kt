@@ -1,4 +1,4 @@
-package com.mehdi.rahmani.homeCa.Model.Objects
+package com.mehdi.rahmani.homeCa.model.objects
 
 import androidx.room.*
 
