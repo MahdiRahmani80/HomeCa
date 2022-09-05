@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.github.mikephil.charting.data.BarData
+import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
@@ -34,6 +36,20 @@ class HomeChartFragment() : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setChart()
+        setBarChart()
+    }
+
+    private fun setBarChart() {
+
+        viewModel.getBarPrice(position!!).observe(requireActivity()){ barData->
+            val barDataSet1 = BarDataSet(barData,"قیمت")
+            val barData = BarData(barDataSet1)
+
+            if(_binding != null){
+                binding.chart3.data = barData
+                binding.chart3.invalidate()
+            }
+        }
     }
 
 
