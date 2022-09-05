@@ -14,6 +14,9 @@ interface HomeDao {
     @Query("SELECT * FROM home")
     fun getHomes():List<Home>
 
+    @Query("SELECT * FROM HomesInNeighbour")
+    fun getHomesInNeighbour():List<HomesInNeighbour>
+
     @Query("SELECT * FROM NeighbourInCity")
     fun getNeighbourInCity():List<NeighbourInCity>
 

@@ -6,6 +6,7 @@ import com.mehdi.rahmani.homeCa.data.AppDatabase
 import com.mehdi.rahmani.homeCa.data.local.HomeDao
 import com.mehdi.rahmani.homeCa.data.repository.HomeRepository
 import com.mehdi.rahmani.homeCa.ui.home.HomeViewModel
+import com.mehdi.rahmani.homeCa.ui.home.viewPager.chartFragment.HomeChartViewModel
 import com.mehdi.rahmani.homeCa.ui.main.MainViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -29,10 +30,12 @@ class App : Application() {
                 database.HomeDao()
             }
 
+            single{ HomeRepository(get()) }
+
             // view models
             single {  MainViewModel(get(), get()) }
             single{ HomeViewModel(get()) }
-            single{ HomeRepository(get()) }
+            single{ HomeChartViewModel(get()) }
 
         }
 

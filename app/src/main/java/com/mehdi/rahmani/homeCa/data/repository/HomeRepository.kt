@@ -5,6 +5,7 @@ import android.util.Log
 import com.mehdi.rahmani.homeCa.data.local.HomeDao
 import com.mehdi.rahmani.homeCa.model.City
 import com.mehdi.rahmani.homeCa.model.Home
+import com.mehdi.rahmani.homeCa.model.HomesInNeighbour
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -34,4 +35,14 @@ class HomeRepository constructor(private val homeDao: HomeDao) {
         }.flowOn(Dispatchers.IO)
     }
 
+    suspend fun getHomesInNeighbour(): Flow<List<HomesInNeighbour>> {
+        return flow {
+
+            try {
+                emit(homeDao.getHomesInNeighbour())
+            } catch (e: Exception) {
+                Log.e("ErrorGetHomeList", "$e")
+            }
+        }.flowOn(Dispatchers.IO)
+    }
 }

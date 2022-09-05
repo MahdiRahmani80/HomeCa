@@ -4,6 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.mehdi.rahmani.homeCa.model.City
+import com.mehdi.rahmani.homeCa.ui.home.viewPager.chartFragment.HomeChartFragment
 
 class HomeViewPagerAdapter(fragmentActivity: FragmentActivity,private val data: List<City>) :
     FragmentStateAdapter(fragmentActivity) {
