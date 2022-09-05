@@ -11,29 +11,50 @@ import kotlinx.coroutines.launch
 
 class HomeChartViewModel(private val repo: HomeRepository) : ViewModel() {
 
-    private val homesInNeighbour: MutableLiveData<List<Entry>> by lazy {
+    private val homePrice: MutableLiveData<List<Entry>> by lazy {
         MutableLiveData<List<Entry>>()
     }
 
-    fun getHomeInNeighbour(position:Int) :LiveData<List<Entry>> {
-        getData(position)
-        return homesInNeighbour
+    private val homesArea: MutableLiveData<List<Entry>> by lazy {
+        MutableLiveData<List<Entry>>()
     }
 
-    private fun getData(position: Int) {
+    fun getHomeArea(position: Int): LiveData<List<Entry>> {
+        getData(position, Data.AREA)
+        return homesArea
+    }
+
+    fun getHomePrice(position: Int): LiveData<List<Entry>> {
+        getData(position, Data.PRICE)
+        return homePrice
+    }
+
+    private fun getData(position: Int, data: Data) {
         val list = ArrayList<Entry>()
         viewModelScope.launch {
             repo.getHomesInNeighbour(position).collect {
                 for (i in it.indices) {
 
-                    val price = (it[i].home!!.price)!!.toFloat()
-                    list.add(Entry(i.toFloat(), price))
+                    val d = when (data) {
+                        Data.PRICE -> (it[i].home!!.price)!!.toFloat()
+                        Data.AREA -> (it[i].home!!.area)!!.toFloat()
+                    }
+
+                    list.add(Entry(i.toFloat(), d))
                 }
-                homesInNeighbour.postValue(list)
+                when (data) {
+                    Data.PRICE -> homePrice.postValue(list)
+                    Data.AREA -> homesArea.postValue(list)
+                }
+
             }
         }
     }
 
 
+    enum class Data {
+        PRICE,
+        AREA
+    }
 
 }

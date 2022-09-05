@@ -36,7 +36,7 @@ class MakeFakeData {
             for (i in (0..300)) {
                 val randYear = Random.nextInt(1995, 2022)
                 val doc = (randYear % 2 == 0)
-                val area = randYear * i / 1000
+                val area = Random.nextInt(50,1000)
                 val h = Home(i, randYear, doc, area, Random.nextInt(100,1000))
                 dataBase.addHome(h)
                 dataBase.addHomeInNeighbour(HomesInNeighbour(i, h, neighbourList[i % 3]))
