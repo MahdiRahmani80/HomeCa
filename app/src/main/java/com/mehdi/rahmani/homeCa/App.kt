@@ -28,11 +28,11 @@ class App : Application() {
                 val database = get<AppDatabase>()
                 database.HomeDao()
             }
-            single { HomeRepository(get()) }
 
             // view models
             single {  MainViewModel(get(), get()) }
             single{ HomeViewModel(get()) }
+            single{ HomeRepository(get()) }
 
         }
 

@@ -3,9 +3,11 @@ package com.mehdi.rahmani.homeCa.ui.home
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.mehdi.rahmani.homeCa.data.local.HomeDao
 import com.mehdi.rahmani.homeCa.data.repository.HomeRepository
 import com.mehdi.rahmani.homeCa.model.City
+import kotlinx.coroutines.launch
 
 class HomeViewModel(private val repository: HomeRepository) : ViewModel() {
 
@@ -21,8 +23,12 @@ class HomeViewModel(private val repository: HomeRepository) : ViewModel() {
             viewPagerData.postValue(_city!!)
         } else if (_city !is List<City>) {
             // get city list in data base
-            _city = repository.getCityList
-            viewPagerData.postValue(_city!!)
+            viewModelScope.launch{
+                repository.getCityList().collect{
+                    _city = it
+                    viewPagerData.postValue(it)
+                }
+            }
         }
         return viewPagerData
     }

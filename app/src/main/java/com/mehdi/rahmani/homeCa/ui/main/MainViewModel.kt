@@ -10,6 +10,8 @@ import com.mehdi.rahmani.homeCa.data.makeFakeData.MakeFakeData
 import com.mehdi.rahmani.homeCa.data.repository.HomeRepository
 import com.mehdi.rahmani.homeCa.model.Home
 import com.mehdi.rahmani.homeCa.ui.splash.SplashFragment
+import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.launch
 import java.util.*
 import kotlin.concurrent.schedule
 import kotlin.reflect.KProperty
@@ -17,6 +19,11 @@ import kotlin.reflect.KProperty
 class MainViewModel(private val repo: HomeRepository, private val homeDao: HomeDao) : ViewModel() {
 
 
+    private val sizeHome: MutableLiveData<Int> by lazy {
+        MutableLiveData<Int>().also{
+            getHomeCount()
+        }
+    }
     private var _fr: Fragment? = null
     private val fr: MutableLiveData<Fragment> by lazy {
         MutableLiveData<Fragment>().also {
@@ -40,8 +47,17 @@ class MainViewModel(private val repo: HomeRepository, private val homeDao: HomeD
     }
 
 
-    fun getHomeCount() = repo.homeCount
-    fun setFakeHome(){ MakeFakeData.mkRandomHome(homeDao)   }
+    fun getHomeSize() = sizeHome
+
+    private fun getHomeCount() = viewModelScope.launch {
+        repo.getHomeSize().collect {
+            sizeHome.postValue(it)
+        }
+    }
+
+    fun setFakeHome() {
+        MakeFakeData.mkRandomHome(homeDao)
+    }
 
     private fun setFragment() {
 
