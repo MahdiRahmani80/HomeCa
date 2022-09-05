@@ -35,7 +35,7 @@ class App : Application() {
             // view models
             single {  MainViewModel(get(), get()) }
             single{ HomeViewModel(get()) }
-            single{ HomeChartViewModel(get()) }
+            factory{ HomeChartViewModel(get()) }
 
         }
 

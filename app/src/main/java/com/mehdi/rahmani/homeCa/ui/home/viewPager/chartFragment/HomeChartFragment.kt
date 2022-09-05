@@ -14,7 +14,7 @@ import org.koin.android.ext.android.inject
 class HomeChartFragment() : Fragment() {
 
     private val viewModel: HomeChartViewModel by inject()
-    var position: Int? = null
+    var position: Int? = 0
 
     private var _binding: FragmentHomeChartBinding? = null
     private val binding get() = _binding!!
@@ -32,19 +32,20 @@ class HomeChartFragment() : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-            setChart()
+        setChart()
     }
 
 
     private fun setChart() {
 
-        viewModel.getHomeInNeighbour().observe(requireActivity()) {
-
+        viewModel.getHomeInNeighbour(position!!).observe(requireActivity()) {
             val lineDataset1 = LineDataSet(it, "قیمت")
             val lineData = LineData(lineDataset1)
-            binding.chart.data = lineData
-            binding.chart.invalidate()
 
+            if (_binding != null) {
+                binding.chart.data = lineData
+                binding.chart.invalidate()
+            }
         }
 
     }

@@ -1,5 +1,6 @@
 package com.mehdi.rahmani.homeCa.ui.home.viewPager.chartFragment
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -11,25 +12,25 @@ import kotlinx.coroutines.launch
 class HomeChartViewModel(private val repo: HomeRepository) : ViewModel() {
 
     private val homesInNeighbour: MutableLiveData<List<Entry>> by lazy {
-        MutableLiveData<List<Entry>>().also {
-            getData()
-        }
-
+        MutableLiveData<List<Entry>>()
     }
 
-    fun getHomeInNeighbour() = homesInNeighbour
+    fun getHomeInNeighbour(position:Int) :LiveData<List<Entry>> {
+        getData(position)
+        return homesInNeighbour
+    }
 
-    private fun getData() {
+    private fun getData(position: Int) {
         val list = ArrayList<Entry>()
         viewModelScope.launch {
-            repo.getHomesInNeighbour().collect {
-                for (i in it) {
-                    val id: Float = (i.id)!!.toFloat()
-                    val price = (i.home!!.price)!!.toFloat()
-                    list.add(Entry(id, price))
+            repo.getHomesInNeighbour(position).collect {
+                for (i in it.indices) {
+
+                    val price = (it[i].home!!.price)!!.toFloat()
+                    list.add(Entry(i.toFloat(), price))
                 }
+                homesInNeighbour.postValue(list)
             }
-            homesInNeighbour.postValue(list)
         }
     }
 

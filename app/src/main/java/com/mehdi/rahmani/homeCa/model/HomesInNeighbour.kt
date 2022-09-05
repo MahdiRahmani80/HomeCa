@@ -7,6 +7,6 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "HomesInNeighbour")
 data class HomesInNeighbour(
     @PrimaryKey val id: Int?,
-    @Embedded(prefix = "_home") val home: Home?,
-    @Embedded(prefix = "_neighbour") val neighbour: Neighbourhood?
+    @Embedded(prefix = "home_") val home: Home?,
+    @Embedded(prefix = "neighbour_") val neighbour: Neighbourhood?
 )

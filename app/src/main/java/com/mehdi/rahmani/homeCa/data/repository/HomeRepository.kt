@@ -35,11 +35,11 @@ class HomeRepository constructor(private val homeDao: HomeDao) {
         }.flowOn(Dispatchers.IO)
     }
 
-    suspend fun getHomesInNeighbour(): Flow<List<HomesInNeighbour>> {
+    suspend fun getHomesInNeighbour(position:Int): Flow<List<HomesInNeighbour>> {
         return flow {
 
             try {
-                emit(homeDao.getHomesInNeighbour())
+                emit(homeDao.getHomesInNeighbour(position))
             } catch (e: Exception) {
                 Log.e("ErrorGetHomeList", "$e")
             }
