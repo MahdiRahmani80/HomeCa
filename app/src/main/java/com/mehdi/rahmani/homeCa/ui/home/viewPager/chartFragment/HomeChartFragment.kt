@@ -1,15 +1,13 @@
 package com.mehdi.rahmani.homeCa.ui.home.viewPager.chartFragment
 
+import android.graphics.Color
 import android.graphics.Color.*
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.github.mikephil.charting.data.BarData
-import com.github.mikephil.charting.data.BarDataSet
-import com.github.mikephil.charting.data.LineData
-import com.github.mikephil.charting.data.LineDataSet
+import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import com.mehdi.rahmani.homeCa.databinding.FragmentHomeChartBinding
 import org.koin.android.ext.android.inject
@@ -37,6 +35,22 @@ class HomeChartFragment() : Fragment() {
 
         setChart()
         setBarChart()
+        setPieChart()
+    }
+
+    private fun setPieChart() {
+
+        viewModel.getPiePrice(position!!).observe(requireActivity()){ pie->
+
+            val pieDataSet = PieDataSet(pie,"محله ها")
+            val pirData = PieData(pieDataSet)
+
+            if(_binding !=null){
+                binding.chart4.data = pirData
+                binding.chart4.invalidate()
+            }
+        }
+
     }
 
     private fun setBarChart() {

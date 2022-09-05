@@ -33,6 +33,14 @@
                 android:layout_height="400dp"
                 android:layout_below="@+id/chart2"
                 android:layout_marginTop="15dp"/>
+
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/chart4"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:layout_below="@+id/chart3"
+                android:layout_marginTop="15dp" />
+
         </RelativeLayout>
     </ScrollView>
 

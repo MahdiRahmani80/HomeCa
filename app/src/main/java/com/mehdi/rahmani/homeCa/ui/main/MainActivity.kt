@@ -33,8 +33,8 @@ class MainActivity : AppCompatActivity() {
     private fun setData(mainVM: MainViewModel) {
 
         // if database is empty
-        mainVM.getHomeSize().observe(this) {
-            if (it == 0) {
+        mainVM.getHomeSize().observe(this) { size ->
+            if (size == 0) {
                 //make fake data
                 mainVM.setFakeHome()
             }

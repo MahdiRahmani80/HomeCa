@@ -45,4 +45,15 @@ class HomeRepository constructor(private val homeDao: HomeDao) {
             }
         }.flowOn(Dispatchers.IO)
     }
+
+    suspend fun getHomesInNeighbour(): Flow<List<HomesInNeighbour>> {
+        return flow {
+
+            try {
+                emit(homeDao.getHomesInNeighbour())
+            } catch (e: Exception) {
+                Log.e("ErrorGetHomeList", "$e")
+            }
+        }.flowOn(Dispatchers.IO)
+    }
 }

@@ -17,6 +17,9 @@ interface HomeDao {
     @Query("SELECT * FROM 'HomesInNeighbour' WHERE neighbour_id = (:position)  ;")
     fun getHomesInNeighbour(position:Int):List<HomesInNeighbour>
 
+    @Query("SELECT * FROM 'HomesInNeighbour' ;")
+    fun getHomesInNeighbour():List<HomesInNeighbour>
+
     @Query("SELECT * FROM NeighbourInCity")
     fun getNeighbourInCity():List<NeighbourInCity>
 

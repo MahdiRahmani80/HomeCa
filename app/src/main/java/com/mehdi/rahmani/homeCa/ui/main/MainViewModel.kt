@@ -18,11 +18,8 @@ import kotlin.reflect.KProperty
 
 class MainViewModel(private val repo: HomeRepository, private val homeDao: HomeDao) : ViewModel() {
 
-
     private val sizeHome: MutableLiveData<Int> by lazy {
-        MutableLiveData<Int>().also{
-            getHomeCount()
-        }
+        MutableLiveData<Int>()
     }
     private var _fr: Fragment? = null
     private val fr: MutableLiveData<Fragment> by lazy {
@@ -47,7 +44,10 @@ class MainViewModel(private val repo: HomeRepository, private val homeDao: HomeD
     }
 
 
-    fun getHomeSize() = sizeHome
+    fun getHomeSize(): LiveData<Int> {
+        getHomeCount()
+        return sizeHome
+    }
 
     private fun getHomeCount() = viewModelScope.launch {
         repo.getHomeSize().collect {
@@ -56,7 +56,8 @@ class MainViewModel(private val repo: HomeRepository, private val homeDao: HomeD
     }
 
     fun setFakeHome() {
-        MakeFakeData.mkRandomHome(homeDao)
+        if (homeDao.getHomesSize() == 0)
+            MakeFakeData.mkRandomHome(homeDao)
     }
 
     private fun setFragment() {

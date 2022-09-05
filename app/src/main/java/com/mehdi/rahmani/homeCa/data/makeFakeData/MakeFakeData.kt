@@ -27,7 +27,7 @@ class MakeFakeData {
             // add neighbour
 
             for (n in (0..2)) {
-                val n = Neighbourhood(n, "محله $n")
+                val n = Neighbourhood(n, "محله ${n+1}")
                 neighbourList.add(n)
                 dataBase.addNeighbour(n)
             }
