@@ -47,7 +47,7 @@ class HomeChartFragment() : Fragment() {
     private fun setCandleStickChart() {
 
         viewModel.getScatterChart(position!!).observe(requireActivity()){ data->
-            val scatterDataSet1 = ScatterDataSet(data,"قیمت ها")
+            val scatterDataSet1 = ScatterDataSet(data,"")
             val scatterData = ScatterData(scatterDataSet1)
             scatterDataSet1.setDrawIcons(true)
             scatterDataSet1.color = rgb(139,0,139)
@@ -59,16 +59,19 @@ class HomeChartFragment() : Fragment() {
 
             if (_binding != null){
                 binding.chart5.data = scatterData
-                binding.chart5.axisLeft.setDrawGridLines(false)
-                binding.chart5.axisRight.setDrawGridLines(false)
-                binding.chart5.xAxis.setDrawGridLines(false)
+//                binding.chart5.axisLeft.setDrawGridLines(false)
+//                binding.chart5.axisRight.setDrawGridLines(false)
+                binding.chart5.setPinchZoom(false)
+//                binding.chart5.xAxis.setDrawGridLines(false)
                 binding.chart5.setGridBackgroundColor(rgb(4, 9, 35))
                 binding.chart5.setNoDataTextColor(WHITE)
                 binding.chart5.legend.textColor = WHITE
+                binding.chart5.xAxis.position = XAxis.XAxisPosition.BOTTOM
+                binding.chart5.legend.isEnabled = false
 
-                binding.chart5.xAxis.textColor = WHITE
+                binding.chart5.xAxis.textColor = 0
                 binding.chart5.axisLeft.textColor = WHITE
-                binding.chart5.axisRight.textColor = WHITE
+                binding.chart5.axisRight.textColor = 0
                 val l: Legend =  binding.chart5.legend
 
                 binding.chart5.invalidate()
