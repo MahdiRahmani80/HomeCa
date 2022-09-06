@@ -44,9 +44,12 @@
             <com.github.mikephil.charting.charts.ScatterChart
                 android:id="@+id/chart5"
                 android:layout_width="match_parent"
-                android:layout_height="400dp"
+                android:layout_height="300dp"
                 android:layout_below="@+id/chart4"
-                android:layout_marginTop="15dp" />
+                android:layout_marginTop="15dp"
+                android:padding="50dp"
+                android:paddingBottom="10dp"
+                android:background="@color/background"/>
 
         </RelativeLayout>
     </ScrollView>

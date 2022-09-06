@@ -1,12 +1,16 @@
 package com.mehdi.rahmani.homeCa.ui.home.viewPager.chartFragment
 
-import android.graphics.Color
+import android.annotation.SuppressLint
 import android.graphics.Color.*
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import com.github.mikephil.charting.charts.ScatterChart
+import com.github.mikephil.charting.components.Legend
+import com.github.mikephil.charting.components.XAxis
+import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import com.mehdi.rahmani.homeCa.databinding.FragmentHomeChartBinding
@@ -39,14 +43,34 @@ class HomeChartFragment() : Fragment() {
         setCandleStickChart()
     }
 
+    @SuppressLint("ResourceAsColor")
     private fun setCandleStickChart() {
 
         viewModel.getScatterChart(position!!).observe(requireActivity()){ data->
             val scatterDataSet1 = ScatterDataSet(data,"قیمت ها")
             val scatterData = ScatterData(scatterDataSet1)
+            scatterDataSet1.setDrawIcons(true)
+            scatterDataSet1.color = rgb(139,0,139)
+            scatterDataSet1.setScatterShape(ScatterChart.ScatterShape.CIRCLE)
+            scatterDataSet1.scatterShapeSize = 30f
+            scatterDataSet1.highLightColor = BLUE
+            scatterDataSet1.valueTextColor = rgb(255,255,255)
+
 
             if (_binding != null){
                 binding.chart5.data = scatterData
+                binding.chart5.axisLeft.setDrawGridLines(false)
+                binding.chart5.axisRight.setDrawGridLines(false)
+                binding.chart5.xAxis.setDrawGridLines(false)
+                binding.chart5.setGridBackgroundColor(rgb(4, 9, 35))
+                binding.chart5.setNoDataTextColor(WHITE)
+                binding.chart5.legend.textColor = WHITE
+
+                binding.chart5.xAxis.textColor = WHITE
+                binding.chart5.axisLeft.textColor = WHITE
+                binding.chart5.axisRight.textColor = WHITE
+                val l: Legend =  binding.chart5.legend
+
                 binding.chart5.invalidate()
             }
         }

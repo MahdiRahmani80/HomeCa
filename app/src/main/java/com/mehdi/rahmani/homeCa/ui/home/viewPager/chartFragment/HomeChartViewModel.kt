@@ -11,6 +11,7 @@ import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.data.CandleEntry
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.PieEntry
+import com.mehdi.rahmani.homeCa.R
 import com.mehdi.rahmani.homeCa.data.repository.HomeRepository
 import kotlinx.coroutines.launch
 
@@ -35,12 +36,12 @@ class HomeChartViewModel(private val repo: HomeRepository) : ViewModel() {
     }
 
     // ScatterChart
-    private val candlePrice: MutableLiveData<List<BarEntry>> by lazy {
-        MutableLiveData<List<BarEntry>>()
+    private val candlePrice: MutableLiveData<List<Entry>> by lazy {
+        MutableLiveData<List<Entry>>()
     }
 
 
-    fun getScatterChart(position: Int): LiveData<List<BarEntry>> {
+    fun getScatterChart(position: Int): LiveData<List<Entry>> {
         getCandleData(position, Data.PRICE)
         return candlePrice
     }
