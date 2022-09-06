@@ -36,6 +36,20 @@ class HomeChartFragment() : Fragment() {
         setChart()
         setBarChart()
         setPieChart()
+        setCandleStickChart()
+    }
+
+    private fun setCandleStickChart() {
+
+        viewModel.getScatterChart(position!!).observe(requireActivity()){ data->
+            val scatterDataSet1 = ScatterDataSet(data,"قیمت ها")
+            val scatterData = ScatterData(scatterDataSet1)
+
+            if (_binding != null){
+                binding.chart5.data = scatterData
+                binding.chart5.invalidate()
+            }
+        }
     }
 
     private fun setPieChart() {
