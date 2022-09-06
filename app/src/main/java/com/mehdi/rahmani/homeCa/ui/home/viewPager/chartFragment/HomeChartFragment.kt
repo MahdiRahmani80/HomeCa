@@ -40,11 +40,11 @@ class HomeChartFragment() : Fragment() {
         setChart()
         setBarChart()
         setPieChart()
-        setScatterStickChart()
+        setScatterChart()
     }
 
     @SuppressLint("ResourceAsColor")
-    private fun setScatterStickChart() {
+    private fun setScatterChart() {
 
         viewModel.getScatterChart(position!!).observe(requireActivity()){ data->
             val scatterDataSet1 = ScatterDataSet(data,"")
